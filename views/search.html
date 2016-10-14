@@ -1,0 +1,365 @@
+<h3>Поиск предложений</h3>
+
+
+<!-- DEMO FILTER BLOCK -->
+
+<!--<div class="grow"&lt;!&ndash; ng-controller="DemoSearchCtrl" ng-if="userVerificationLevel === 1 && userType === 'borrower'"&ndash;&gt;>
+
+    <div class="m-col-4">
+        <div class="filter-block">
+            &lt;!&ndash;<div class="filter">
+                <h4>Фильтр номер один</h4>
+                <md-checkbox ng-model="data.cb1" aria-label="Checkbox 1" class="md-primary">
+                    Параметр фильтра
+                </md-checkbox>
+                <md-checkbox ng-model="data.cb2" aria-label="Checkbox 1" class="md-primary">
+                    Параметр фильтра
+                </md-checkbox>
+                <md-checkbox ng-model="data.cb3" aria-label="Checkbox 1" class="md-primary">
+                    Параметр фильтра
+                </md-checkbox>
+            </div>&ndash;&gt;
+            <div class="filter">
+                <md-input-container>
+                    <label>Количество на странице</label>
+                    <md-select ng-model="someData.limit"ng-change="filterMe()" disabled>
+                        <md-option>
+                            5
+                        </md-option>
+                        <md-option selected>
+                            10
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+            <div class="filter">
+                <md-input-container>
+                    <label>Сортировать по:</label>
+                    <md-select ng-model="someData.orderBy"ng-change="filterMe()" disabled>
+                        <md-option value="createDate" selected>
+                            Дата создания
+                        </md-option>
+                        <md-option value="minSum">
+                            Сумма
+                        </md-option>
+                        <md-option value="term">
+                            Срок
+                        </md-option>
+                        <md-option value="minPercent">
+                            Процент
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+            <div class="filter">
+                <md-input-container>
+                    <label>Направление сортировки:</label>
+                    <md-select ng-model="someData.orderDirection" ng-change="filterMe()" disabled>
+                        <md-option value="ASC" selected>
+                            UP
+                        </md-option>
+                        <md-option value="DESC">
+                            DOWN
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+            <div class="filter">
+                <h4>Сумма</h4>
+                <div class="range-filter">
+                    <input type="number" ng-model="someData.minSum" ng-change="filterMe()" disabled> - <input type="number" ng-model="someData.maxSum" ng-change="filterMe()" disabled>
+                    <div class="range">
+                        <div range-slider min="0" max="200000" model-min="someData.minSum" model-max="someData.maxSum" on-handle-up='filterMe();' disabled="true"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="filter">
+                <h4>Срок (месяцев)</h4>
+                <div class="range-filter">
+                    <input type="number" ng-model="someData.minTerm" ng-change="filterMe()" disabled> - <input type="number" ng-model="someData.maxTerm" ng-change="filterMe()" disabled>
+                    <div class="range">
+                        <div range-slider min="1" max="24" model-min="someData.minTerm" model-max="someData.maxTerm" on-handle-up='filterMe();' disabled="true"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="filter">
+                <h4>Процент</h4>
+                <div class="range-filter">
+                    <input type="number" ng-model="someData.minPercent" ng-change="filterMe()" disabled> - <input type="number" ng-model="someData.maxPercent" ng-change="filterMe()" disabled>
+                    <div class="range">
+                        <div range-slider min="1" max="20" model-min="someData.minPercent" model-max="someData.maxPercent" on-handle-up='filterMe();' disabled="true"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        &lt;!&ndash; END DEMO FILTERS &ndash;&gt;
+
+    </div>
+    <div class="m-col-8">
+
+        &lt;!&ndash; DEMO OFFERS (userVerificationLevel === 1) &ndash;&gt;
+
+        <div class="offers-block">
+            <div class="spinner"ng-show="contentSpinner"><md-progress-circular md-mode="indeterminate" md-diameter="90" ></md-progress-circular></div>
+            <div class="offer" ng-repeat="demoOffer in demoOffers.offers track by $index">
+                <div class="offer-header" flex>
+                    <div class="money">
+                        <div class="icon icon-q6"></div>
+                        <div ng-if="demoOffer.minSum = demoOffer.maxSum">{{demoOffer.minSum}} <span>{{demoOffer.currencyCode}}</span></div>
+                        <div ng-if="demoOffer.minSum != demoOffer.maxSum">{{demoOffer.minSum}} - {{demoOffer.maxSum}} <span>{{demoOffer.currencyCode}}</span></div>
+                    </div>
+                    <div class="time">
+                        <div class="icon icon-q8"></div>
+                        <div ng-if="demoOffer.term.days != 0">{{demoOffer.term.months}} <span ng-if="demoOffer.term.months">месяца</span> {{demoOffer.term.days}} <span>дней</span></div>
+                        <div ng-if="demoOffer.term.days">{{demoOffer.term.months}} <span ng-if="demoOffer.term.months">месяца</span></div>
+                    </div>
+                    <div class="percent">
+                        <div class="icon  icon-q9"></div>
+                        <div ng-if="demoOffer.minPercent = demoOffer.maxPercent">{{demoOffer.minPercent}} <span>% годовых</span></div>
+                        <div ng-if="demoOffer.minPercent != demoOffer.maxPercent">{{demoOffer.minPercent}} - {{demoOffer.maxPercent}}<span>% годовых</span></div>
+                    </div>
+                </div>
+                <div class="offer-body">
+                    <div class="grow">
+                        <div class="m-col-5">
+                            <div class="person">
+                                <div class="photo-rait">
+                                    <div class="photo" style="background-image: url({{person.photo}}); background-size: cover; background-position: center; background-color: #fff">
+                                        <div class="empty-photo fa fa-user" ng-if="!person.photo"></div>
+                                    </div>
+                                    <div class="info">
+                                        <p class="name">Имя</p>
+                                        <p class="role">Тип</p>
+                                    </div>
+                                </div>
+                                <div class="rait">
+                                    <uib-rating ng-model="rate" max="5" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" aria-labelledby="default-rating"></uib-rating>
+                                    <div class="dig">78/100</div>
+                                </div>
+                                <div class="timing">
+                                    <div class="access"></div>
+                                    <p><span class="access-text">Дата создания</span> {{offer.createDate}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="m-col-7">
+                            <div class="description">
+                                <h4>Header of description</h4>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat tempore asperiores nemo aliquam adipisci exercitationem ducimus recusandae, earum vel ut ratione similique ullam, eius rerum reiciendis magni. Expedita, esse obcaecati.</p>
+                                &lt;!&ndash;<a href="" class="button calculator fa fa-calculator">Рассчитать кредит</a>&ndash;&gt;
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="btns-group">
+                    <div class="btns-left">
+                        &lt;!&ndash;<a href=""></a>
+                        <a href=""></a>
+                        <a href=""></a>&ndash;&gt;
+                    </div>
+                    <div class="btns-right">
+                        <a href="" class="icon-check">Принять оффер</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        &lt;!&ndash; END DEMO OFFERS (userVerificationLevel === 1) &ndash;&gt;
+
+
+    </div>
+</div>-->
+
+
+<div class="grow">
+    <div class="m-col-4">
+
+        <!-- FILTER BLOCK -->
+        <div class="filter-block">
+            <div class="filter" >
+                <md-input-container>
+                    <label>Количество на странице</label>
+                    <md-select ng-model="filterData.limit" ng-change="hasPermissionDemo(userData.user.roles) || filterMe()" ng-disabled="hasPermissionDemo(userData.user.roles)">
+                        <md-option>
+                            5
+                        </md-option>
+                        <md-option selected>
+                            10
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+            <div class="filter">
+                <md-input-container>
+                    <label>Сортировать по:</label>
+                    <md-select ng-model="filterData.orderBy" ng-change="hasPermissionDemo(userData.user.roles) || filterMe()" ng-disabled="hasPermissionDemo(userData.user.roles)">
+                        <md-option value="createDate" selected>
+                            Дата создания
+                        </md-option>
+                        <md-option value="minSum">
+                            Сумма
+                        </md-option>
+                        <md-option value="term">
+                            Срок
+                        </md-option>
+                        <md-option value="minPercent">
+                            Процент
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+            <div class="filter">
+                <md-input-container>
+                    <label>Валюта:</label>
+                    <md-select ng-model="filterData.currency" ng-change="hasPermissionDemo(userData.user.roles) || filterMe()" ng-disabled="hasPermissionDemo(userData.user.roles)">
+                        <md-option value="1" selected>
+                            UAH
+                        </md-option>
+                        <md-option value="2">
+                            USD
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+            <div class="filter">
+                <md-input-container>
+                    <label>Направление сортировки:</label>
+                    <md-select ng-model="filterData.orderDirection" ng-change="hasPermissionDemo(userData.user.roles) || filterMe()" ng-disabled="hasPermissionDemo(userData.user.roles)">
+                        <md-option value="ASC" selected>
+                            UP
+                        </md-option>
+                        <md-option value="DESC">
+                            DOWN
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+            <div class="filter">
+                <md-input-container>
+                    <label>Месяцев/дней</label>
+                    <md-select ng-model="filterData.termType" ng-change="hasPermissionDemo(userData.user.roles) || filterMe()" ng-disabled="hasPermissionDemo(userData.user.roles)">
+                        <md-option value="M">
+                            Месяцев
+                        </md-option>
+                        <md-option value="D">
+                            Дней
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+            <div class="filter">
+                <h4>Сумма</h4>
+                <div class="range-filter">
+                    <input type="number" ng-model="filterData.minSum" ng-change="hasPermissionDemo(userData.user.roles) || filterMe()" ng-disabled="hasPermissionDemo(userData.user.roles)"> - <input type="number" ng-model="filterData.maxSum" ng-change="hasPermissionDemo(userData.user.roles) || filterMe()" ng-disabled="hasPermissionDemo(userData.user.roles)">
+                    <div class="range">
+                        <div range-slider min="0" max="200000" model-min="filterData.minSum" model-max="filterData.maxSum" on-handle-up='hasPermissionDemo(userData.user.roles) || filterMe()' ng-disabled="hasPermissionDemo(userData.user.roles)"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="filter" ng-if="filterData.termType === 'M'">
+                <h4>Срок (месяцев)</h4>
+                <div class="range-filter">
+                    <input type="number" ng-model="filterData.minTerm" ng-change="hasPermissionDemo(userData.user.roles) || filterMe()" ng-disabled="hasPermissionDemo(userData.user.roles)"> - <input type="number" ng-model="filterData.maxTerm" ng-change="hasPermissionDemo(userData.user.roles) || filterMe()" ng-disabled="hasPermissionDemo(userData.user.roles)">
+                    <div class="range">
+                        <div range-slider min="1" max="24" model-min="filterData.minTerm" model-max="filterData.maxTerm" on-handle-up='hasPermissionDemo(userData.user.roles) || filterMe()' ng-disabled="hasPermissionDemo(userData.user.roles)"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="filter" ng-if="filterData.termType === 'D'">
+                <h4>Срок (дней)</h4>
+                <div class="range-filter">
+                    <input type="number" ng-model="filterData.minTerm" ng-change="hasPermissionDemo(userData.user.roles) || filterMe()" ng-disabled="hasPermissionDemo(userData.user.roles)"> - <input type="number" ng-model="filterData.maxTerm" ng-change="hasPermissionDemo(userData.user.roles) || filterMe()" ng-disabled="hasPermissionDemo(userData.user.roles)">
+                    <div class="range">
+                        <div range-slider min="10" max="360" model-min="filterData.minTerm" model-max="filterData.maxTerm" on-handle-up='hasPermissionDemo(userData.user.roles) || filterMe()' ng-disabled="hasPermissionDemo(userData.user.roles)"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="filter">
+                <h4>Процент</h4>
+                <div class="range-filter">
+                    <input type="number" ng-model="filterData.minPercent" ng-change="hasPermissionDemo(userData.user.roles) || filterMe()" ng-disabled="hasPermissionDemo(userData.user.roles)"> - <input type="number" ng-model="filterData.maxPercent" ng-change="hasPermissionDemo(userData.user.roles) || filterMe()" ng-disabled="hasPermissionDemo(userData.user.roles)">
+                    <div class="range">
+                        <div range-slider min="1" max="20" model-min="filterData.minPercent" model-max="filterData.maxPercent" on-handle-up='hasPermissionDemo(userData.user.roles) || filterMe()' ng-disabled="hasPermissionDemo(userData.user.roles)"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="m-col-8">
+
+        <!-- OFFERS -->
+
+        <div class="offers-block">
+
+            <div class="spinner" ng-show="contentSpinner"><md-progress-circular md-mode="indeterminate" md-diameter="90" ></md-progress-circular></div>
+            <div class="offer" ng-repeat="offer in offers.offers track by $index">
+                <div class="offer-header" flex>
+                    <div class="money">
+                        <div class="icon icon-q6"></div>
+                        <div ng-if="offer.minSumma === offer.maxSumma">{{offer.minSumma | number:0}} <span>{{offer.currencyCode}}</span></div>
+                        <div ng-if="offer.minSumma != offer.maxSumma">{{offer.minSumma | number:0}}-{{offer.maxSumma | number:0}} <span>{{offer.currencyCode}}</span></div>
+                    </div>
+                    <div class="time">
+                        <div class="icon icon-q8"></div>
+                        <div>{{offer.term}}<span ng-if="offer.termType == 'M'"> месяца</span><span ng-if="offer.termType == 'D'"> дней</span></div>
+                    </div>
+                    <div class="percent">
+                        <div class="icon  icon-q9"></div>
+                        <div ng-if="parseInt(offer.minPercent) === parseInt(offer.maxPercent)">{{offer.minPercent}} <span>% годовых</span></div>
+                        <div ng-if="parseInt(offer.minPercent) != parseInt(offer.maxPercent)">{{offer.minPercent}}-{{offer.maxPercent}}<span> % годовых</span></div>
+                    </div>
+                </div>
+                <div class="offer-body">
+                    <div class="grow">
+                        <div class="m-col-5">
+                            <div class="person">
+                                <div class="photo-rait">
+                                    <div class="photo" style="background-size: cover; background-position: center; background-color: #fff">
+                                        <div class="empty-photo fa fa-user"></div>
+                                    </div>
+                                    <div class="info">
+                                        <p class="name">Имя</p>
+                                        <p class="role">Тип</p>
+                                    </div>
+                                </div>
+                                <div class="rait">
+                                    <uib-rating ng-model="rate" max="5" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" aria-labelledby="default-rating"></uib-rating>
+                                    <div class="dig">78/100</div>
+                                </div>
+                                <div class="timing">
+                                    <div class="access"></div>
+                                    <p><span class="access-text">Дата создания</span> {{offer.createDate}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="m-col-7">
+                            <div class="description">
+                                <h4>{{offer.header}}</h4>
+                                <p>{{offer.description}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="btns-group">
+                    <div class="btns-left">
+                        <!--<a href=""></a>
+                        <a href=""></a>
+                        <a href=""></a>-->
+                    </div>
+                    <div class="btns-right">
+                        <a href="" class="button calculator fa fa-calculator" ng-if="offer.minSumma === offer.maxSumma && parseInt(offer.minPercent) === parseInt(offer.maxPercent)" ng-click="openCalculator(offer)"></a>
+                        <a href="" class="icon-check" ng-if="offer.minSumma === offer.maxSumma && parseInt(offer.minPercent) === parseInt(offer.maxPercent)" ng-click="hasPermissionVerificated(userRoles) || openModalOCreate(offer)" ng-disabled="hasPermissionVerificated(userRoles)">Взять кредит</a>
+                        <a href="" class="icon-exchange" ng-if="offer.minSumma != offer.maxSumma || parseInt(offer.minPercent) != parseInt(offer.maxPercent)" ng-click="hasPermissionVerificated(userRoles) || openModalCreate(offer)" ng-disabled="hasPermissionVerificated(userRoles)">Начать торги</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- END OFFERS (userVerificationLevel > 1) -->
+
+        <uib-pagination ng-if="userVerificationLevel > 1 && offersD" total-items="offersD.paginator.totalItems" items-per-page="filterData.limit" ng-model="someData.page" num-pages="offersPages" ng-change="filterMe()"></uib-pagination>
+    </div>
+</div>

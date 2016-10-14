@@ -1,0 +1,75 @@
+<div ng-switch on="dataSuccess" class="animate-switch-container">
+    <div ng-switch-when="create" class="animate-switch">
+        <div class="popup-header">
+            <h3 class="text-left ib">Начать торги!</h3><!--<span class="ib">Шаг 2 из 7</span>-->
+        </div>
+        <div class="form-wrapper">
+            <div>{{errorModal}}</div>
+            <form action="" name="bargainForm">
+                <div layout-gt-sm="row">
+                    <div flex-gt-sm layout-gt-sm="row">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Сумма ({{offerData.currencyCode}})</label>
+                            <input ng-model="offerData.sum" type="number" min="{{offerData.minSumma}}" max="{{offerData.maxSumma}}" required>
+                        </md-input-container>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Процент %</label>
+                            <input ng-model="offerData.percent" type="number" min="{{offerData.minPercent}}" max="{{offerData.maxPercent}}" required>
+                        </md-input-container>
+                    </div>
+                </div>
+                <div layout-gt-sm="row">
+                    <div flex-gt-sm layout-gt-sm="row">
+                        <md-input-container flex-gt-sm>
+                            <label>Срок (<span ng-if="offerData.termType === 'M'" flex-gt-sm>месяцев</span><span ng-if="offerData.termType === 'D'" flex-gt-sm>дней</span>)</label>
+                            <input ng-modal="offerData.term" value="{{offerData.term}}" readonly>
+                        </md-input-container>
+                    </div>
+                </div>
+                <div class="grow aicenter">
+                    <div class="m-col-2">
+                        <md-button class="main-btn send-btn" ng-click="sendData()"  ng-disabled="bargainForm.$invalid">Начать торг</md-button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div ng-switch-when="o-create">
+        <div class="popup-header">
+            <h3 class="text-left ib">Взять кредит!</h3><!--<span class="ib">Шаг 2 из 7</span>-->
+        </div>
+        <div class="form-wrapper">
+            <br><br><br>ОТПРАВОЧКА.....<br><br><br>
+        </div>
+    </div>
+    <div ng-switch-when="send-order-create" class="animate-switch">
+        <div class="popup-header"><h3>liq</h3></div>
+        {{redirectErrors}}
+        <div class="form-wrapper">
+            <md-input-container flex-gt-sm>
+                <label>Сумма</label>
+                <input ng-model="orderData.amount">
+            </md-input-container>
+            <md-input-container flex-gt-sm>
+                <label>Валюта</label>
+                <md-select ng-model="orderData.currency">
+                    <md-option value="1">
+                        UAH
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <md-button class="main-btn send-btn" ng-click="sendOrderCreate()">ОК</md-button>
+        </div>
+    </div>
+    <div ng-switch-when="true" class="animate-switch">
+        <div class="popup-header"><h3>Отправлено!</h3></div>
+        <div class="form-wrapper">
+            Спасибо!
+            <md-button class="main-btn send-btn" ng-click="cancel()">ОК</md-button>
+        </div>
+    </div>
+</div>
+<a href="" class="my-close" ng-click="cancel()">
+    <div class="left-border"></div>
+    <div class="right-border"></div>
+</a>

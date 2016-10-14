@@ -1,0 +1,93 @@
+<div ng-switch on="addedOffer" class="animate-switch-container">
+    <div class="spinner" ng-show="spinnerAddOfferModal"><md-progress-circular md-mode="indeterminate" md-diameter="90" ></md-progress-circular></div>
+    <div ng-switch-when="false" class="animate-switch">
+        <div class="popup-header">
+            <h3 class="text-left ib">Добавить оффера</h3><!--<span class="ib">Шаг 2 из 7</span>-->
+        </div>
+        <div class="form-wrapper">
+            <div>{{success.messages}}</div>
+            <div layout-gt-sm="row">
+                <div flex="66" layout-gt-sm="row">
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Мин. сумма </label>
+                        <input ng-model="addOfferData.minSum">
+                    </md-input-container>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Макс. сумма </label>
+                        <input ng-model="addOfferData.maxSum">
+                    </md-input-container>
+                    <md-input-container flex-gt-sm>
+                        <label>Валюта</label>
+                        <md-select ng-model="addOfferData.currency">
+                            <md-option value="1">
+                                UAH
+                            </md-option>
+                            <md-option value="2">
+                                USD
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+            </div>
+            <div layout-gt-sm="row">
+                <div flex="66" layout-gt-sm="row">
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Мин. процент </label>
+                        <input ng-model="addOfferData.minPercent">
+                    </md-input-container>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Макс. процент </label>
+                        <input ng-model="addOfferData.maxPercent">
+                    </md-input-container>
+                    <div flex-gt-sm>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Срок</label>
+                            <input ng-model="addOfferData.term">
+                        </md-input-container>
+                    </div>
+                    <md-input-container flex-gt-sm>
+                        <label>М/Д</label>
+                        <md-select ng-model="addOfferData.termType">
+                            <md-option value="M">
+                                Месяцев
+                            </md-option>
+                            <md-option value="D">
+                                Дней
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+            </div>
+            <div flex-gt-sm>
+                <div flex-gt-sm>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Заголовок</label>
+                        <input ng-model="addOfferData.header">
+                    </md-input-container>
+                </div>
+                <div flex-gt-sm>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Описание</label>
+                        <input ng-model="addOfferData.description">
+                    </md-input-container>
+                </div>
+            </div>
+            <div class="grow aicenter">
+                <div class="m-col-2">
+                    <md-button class="main-btn send-btn" ng-click="addOffer()">Добавить оффер</md-button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-switch-when="true" class="animate-switch">
+        <div class="popup-header"><h3>Оффер успешно добавлен!</h3></div>
+        <div class="form-wrapper">
+            Спасибо!
+            <md-button class="main-btn send-btn" ng-click="cancelAddOffer()">ОК</md-button>
+        </div>
+    </div>
+</div>
+<a href="" class="my-close" ng-click="cancelAddOffer()">
+    <div class="left-border"></div>
+    <div class="right-border"></div>
+</a>

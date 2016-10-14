@@ -1,0 +1,446 @@
+
+
+		<div ng-switch on="currentRole" class="animate-switch-container">
+			<div class="spinner" ng-show="spinnerModal"><md-progress-circular md-mode="indeterminate" md-diameter="90" ></md-progress-circular></div>
+
+			  <div ng-switch-when="borrower_level1" class="animate-switch">
+				  <div ng-switch on="verificationSuccess">
+					  <div ng-switch-when="false">
+						  <div class="popup-header">
+							  <h3 class="text-left ib">Ввод персональных данных заемщика</h3><span class="ib">Шаг 2 из 7</span>
+						  </div>
+						  <div class="form-wrapper">
+							  <div>{{errorModal.messages}}</div>
+							  <p class="notice"><span>* Все поля обязательны для заполнения. </span>Ваши личные данные будут надежно храниться на серверах Мальты и Монако в зашифрованом виде и не будут передаваться третьим лицам. Вся предотавленная информаци необходима для проверки кредитной истории и платежеспособности.</p>
+							  <form name="fstStepForm">
+								  <div layout-gt-sm="row">
+									  <md-input-container class="md-block" flex-gt-sm>
+										  <label>Имя</label>
+										  <input ng-model="user.name" name="firstName" ng-required="true" uib-tooltip="{{success.messages.name}}" tooltip-placement="top"
+												 tooltip-trigger="mouseenter"
+												 tooltip-enable="!user.name || !success.success">
+									  </md-input-container>
+									  <md-input-container class="md-block" flex-gt-sm>
+										  <label>Отчество</label>
+										  <input ng-model="user.surname" name="surname" ng-required="true" uib-tooltip="{{success.messages.surname}}" tooltip-placement="top"
+												 tooltip-trigger="mouseenter"
+												 tooltip-enable="!user.surname || !success.success">
+									  </md-input-container>
+									  <md-input-container class="md-block" flex-gt-sm>
+										  <label>Фамилия</label>
+										  <input ng-model="user.patronymic" name="patronymic" ng-required="true" uib-tooltip="{{success.messages.patronymic}}" tooltip-placement="top"
+												 tooltip-trigger="mouseenter"
+												 tooltip-enable="!user.patronymic || !success.success">
+									  </md-input-container>
+
+								  </div>
+								  <div layout-gt-sm="row">
+									  <md-input-container class="md-block" flex-gt-sm>
+										  <label>Телефон</label>
+										  <input ng-model="user.phone" name="phone" ng-required="true" uib-tooltip="{{success.messages.surname}}" tooltip-placement="top"
+												 tooltip-trigger="mouseenter"
+												 tooltip-enable="!user.surname || success.success === false">
+									  </md-input-container>
+									  <md-input-container class="md-block" flex-gt-sm>
+										  <label>Skype</label>
+										  <input ng-model="user.skype" name="skype" ng-required="true" uib-tooltip="{{success.messages.skype}}" tooltip-placement="top"
+												 tooltip-trigger="mouseenter"
+												 tooltip-enable="!user.skype || !success.success">
+									  </md-input-container>
+									  <md-input-container class="md-block" flex-gt-sm>
+										  <label>Соц.сеть</label>
+										  <input ng-model="user.socialNetwork" name="socialNetwork" ng-required="true" uib-tooltip="{{success.messages.socialNetwork}}" tooltip-placement="top"
+												 tooltip-trigger="mouseenter"
+												 tooltip-enable="!user.socialNetwork || success.success === 'false'">
+									  </md-input-container>
+								  </div>
+								  <div layout-gt-sm="row">
+									  <md-input-container class="md-block" flex-gt-sm>
+										  <md-radio-group ng-model="user.gender">
+											  <md-radio-button value="M" class="md-primary">М</md-radio-button>
+											  <md-radio-button value="F" class="md-primary">Ж</md-radio-button>
+										  </md-radio-group>
+									  </md-input-container>
+									  <md-input-container class="md-block" flex-gt-sm layout="row">
+										  <div flex="50">
+											  <md-checkbox md-no-ink aria-label="Checkbox No Ink" ng-true-value="'on'" ng-model="user.married" class="md-primary">
+												  В браке
+											  </md-checkbox>
+										  </div>
+										  <div flex="50">
+											  <md-checkbox md-no-ink aria-label="Checkbox No Ink" ng-true-value="'on'" ng-model="user.children" class="md-primary">
+												  Дети
+											  </md-checkbox>
+										  </div>
+									  </md-input-container>
+
+
+									  <md-input-container class="md-block" flex-gt-sm layout="row">
+										  <div flex-gt-sm class="date-wrapper">
+											  <label>Дата рождения</label>
+											  <p class="ng-pristine md-input">{{user.birthday | date:'yyyy-MM-dd'}}</p>
+											  <input type="text" class="form-control my-date" uib-datepicker-popup="yyyy-MM-dd" ng-model="user.birthday" is-open="status.opened" min-date="minDate" max-date="maxDate" datepicker-options="" ng-required="true" close-text="" />
+
+										  </div>
+										  <span class="input-group-btn my-date-span" flex-gt-sm>
+											  <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+										  </span>
+									  </md-input-container>
+
+									  <!--<md-datepicker ng-model="user.birthday" md-placeholder="Дата рождения" ng-required="true" md-max-date="maxDate"></md-datepicker>-->
+								  </div>
+								  <div class="grow aicenter">
+									  <div class="m-col-10">
+										  <md-checkbox md-no-ink aria-label="Checkbox No Ink" ng-true-value="'on'" ng-model="user.check" class="md-primary" ng-required="true">
+											  Вся информация правдива и правильна
+										  </md-checkbox>
+									  </div>
+
+									  <div class="m-mar-col-2 m-col-2">
+										  <md-button class="main-btn send-btn" ng-click="send()" ng-disabled="fstStepForm.$invalid">далее</md-button>
+									  </div>
+								  </div>
+
+							  </form>
+						  </div>
+					  </div>
+					  <div ng-switch-when="true">
+						  <div class="popup-header"><h3>Благодарочка!</h3></div>
+						  <div class="form-wrapper">
+							  Спасибо!
+							  <md-button class="main-btn send-btn" ng-click="ok()">далее</md-button>
+						  </div>
+					  </div>
+				  </div>
+			  </div>
+
+
+
+			  <div ng-switch-when="borrower_level2" class="animate-switch">
+				  <div ng-switch on="verificationSuccess">
+					  <div ng-switch-when="false">
+						  <div class="popup-header">
+							  <h3 class="text-left ib">Ввод персональных данных заемщика</h3><span class="ib">Шаг 3 из 7</span>
+						  </div>
+						  <div class="form-wrapper">
+							  <div>{{successScdStep.messages}}</div>
+							  <p class="notice"><span>* Все поля обязательны для заполнения. </span>Ваши личные данные будут надежно храниться на серверах Мальты и Монако в зашифрованом виде и не будут передаваться третьим лицам. Вся предотавленная информаци необходима для проверки кредитной истории и платежеспособности.</p>
+							  <form name="scdStepForm">
+								  <div layout="row">
+									  <md-input-container class="md-block" flex="20">
+										  <label>Серия паспорта</label>
+										  <input ng-model="userPassport.series" name="passport" ng-required="true" ng-minlength="2" ng-maxlength="2">
+									  </md-input-container>
+									  <md-input-container class="md-block" flex="50">
+										  <label>Номер паспорта</label>
+										  <input ng-model="userPassport.number" name="passport" ng-required="true" ng-pattern="/^[0-9]{1,7}$/">
+									  </md-input-container>
+								  </div>
+								  <div layout="row">
+									  <md-input-container class="md-block" flex="33">
+										  <label>Кем выдан</label>
+										  <input ng-model="userPassport.issued" name="passportInfo" ng-required="true">
+									  </md-input-container>
+									  <md-input-container class="md-block" flex="33">
+										  <label>Где выдан</label>
+										  <input ng-model="userPassport.issuedPlace" name="firstName" ng-required="true">
+									  </md-input-container>
+									  <!--<md-input-container class="md-block" flex="33">
+										  <label>Когда выдан</label>
+										  <input ng-model="userPassport.issuedDate" name="nationality" ng-required="true">
+									  </md-input-container>-->
+									  <md-input-container class="md-block" flex="33" layout="row">
+										  <div flex-gt-sm class="date-wrapper">
+											  <label>Когда выдан</label>
+											  <p class="ng-pristine md-input">{{userPassport.issuedDate | date:'yyyy-MM-dd'}}</p>
+											  <input type="text" class="form-control my-date" uib-datepicker-popup="yyyy-MM-dd" ng-model="userPassport.issuedDate" is-open="status.opened" min-date="minDate" max-date="maxDate" datepicker-options="" ng-required="true" close-text="" />
+
+										  </div>
+										  <span class="input-group-btn my-date-span" flex-gt-sm>
+											  <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+										  </span>
+									  </md-input-container>
+								  </div>
+								  <div layout="row">
+									  <md-input-container class="md-block" flex="66">
+										  <label>Адрес прописки</label>
+										  <input ng-model="userPassport.residencePlace" name="firstName" ng-required="true">
+									  </md-input-container>
+									  <md-input-container class="md-block" flex="33">
+										  <label>Гражданство</label>
+										  <input ng-model="userPassport.nationality" name="nationality" ng-required="true">
+									  </md-input-container>
+								  </div>
+								  <div layout="row">
+									  <md-input-container class="md-block" flex="33">
+										  <label>Номер ИНН</label>
+										  <input ng-model="userPassport.iin" name="inn" ng-required="true">
+									  </md-input-container>
+								  </div>
+								  <div class="grow aicenter">
+									  <div class="m-col-10">
+										  <md-checkbox md-no-ink aria-label="Checkbox No Ink" ng-true-value="'on'" ng-model="userPassport.check" class="md-primary" ng-required="true">
+											  Вся информация правдива и правильна
+										  </md-checkbox>
+									  </div>
+									  <div class="m-mar-col-2 m-col-2">
+										  <md-button class="main-btn send-btn" ng-click="send()" ng-disabled="scdStepForm.$invalid">далее</md-button>
+									  </div>
+								  </div>
+							  </form>
+						  </div>
+					  </div>
+					  <div ng-switch-when="true">
+						  <div class="popup-header"><h3>Еще одна благодарочка!</h3></div>
+						  <div class="form-wrapper">
+							  Дважды спасибо!
+							  <md-button class="main-btn send-btn" ng-click="ok()">далее</md-button>
+						  </div>
+					  </div>
+				  </div>
+			  </div>
+
+			  <div ng-switch-when="borrower_level3" class="animate-switch">
+				  <div ng-switch on="verificationSuccess">
+					  <div ng-switch-when="false">
+						  <div class="popup-header">
+							  <h3 class="text-left ib">Скан паспорта</h3><span class="ib">Шаг 4 из 7</span>
+						  </div>
+						  <div class="form-wrapper">
+							  <div>{{successThdStep.messages}}</div>
+							  <p class="notice"><span>* Все поля обязательны для заполнения. </span>Ваши личные данные будут надежно храниться на серверах Мальты и Монако в зашифрованом виде и не будут передаваться третьим лицам. Вся предотавленная информаци необходима для проверки кредитной истории и платежеспособности.</p>
+							  <form name="thdStepForm" enctype="multipart/form-data" method="post">
+								  <div layout="row">
+									  <!--<md-input-container>
+                                          <input type="file" ngf-select ng-model="userDocs.passport" name="file"
+                                                 accept="image/*" ngf-max-size="2MB" required>
+                                          <img ng-show="myForm.file.$valid" ngf-thumbnail="userDocs.passport" class="thumb"> <button ng-click="userDocs.passport = null" ng-show="userDocs.passport">Remove</button>
+                                      </md-input-container>-->
+									  <md-input-container class="md-block" flex="50">
+										  <md-button class="md-raised md-primary md-upload" ng-model="userDocs.passport" file-model="userDocs.passport" ngf-pattern="'image/*'" ngf-select ngf-accept="'image/*'" ngf-max-size="20MB" ng-required="true" ><input name="file" type="file" ng-required="true" class="" ng-model="userDocs.passport" file-model="userDocs.passport">Загрузить скан копии и паспорта</md-button>
+										  <p class="notice">Необходима загрузка 2, 3, 4, 5, 11, 12 страниц паспорта<br>В случае достежения Вами 40-летнего возраста 6 и 7 странца обязательны к загрузке</p>
+									  </md-input-container>
+									  <p>{{userDocs.passport.name}}</p>
+								  </div>
+								  <div layout="row">
+									  <md-input-container class="md-block" flex="50">
+										  <md-button class="md-raised md-primary md-upload" ng-required="true" ng-model="userDocs.iin" file-model="userDocs.iin" ngf-pattern="'image/*'" ngf-select ngf-accept="'image/*'" ngf-max-size="20MB"  ><input name="file" type="file" class="" ng-required="true" ng-model="userDocs.iin" file-model="userDocs.iin">Загрузить скан-копию ИНН</md-button>
+										  <p>{{userDocs.iin.name}}</p>
+									  </md-input-container>
+									  <md-input-container class="md-block" flex="50">
+										  <md-button class="md-raised md-primary md-upload" ng-model="userDocs.work" file-model="userDocs.work" ngf-pattern="'image/*'" ngf-select ngf-accept="'image/*'" ngf-max-size="20MB"  ><input name="file" type="file" class="" ng-model="userDocs.work" file-model="userDocs.work">Справка с места работы</md-button>
+										  <p>{{userDocs.work.name}}</p>0
+									  </md-input-container>
+								  </div>
+								  <div layout="row">
+									  <asda></asda>
+								  </div>
+								  <div class="grow aicenter">
+									  <div class="m-col-10">
+										  <md-checkbox md-no-ink aria-label="Checkbox No Ink" ng-true-value="'on'" ng-model="userDocs.check" class="md-primary" ng-required="true">
+											  Вся информация правдива и правильна
+										  </md-checkbox>
+									  </div>
+									  <div class="m-mar-col-2 m-col-2">
+										  <md-button class="main-btn send-btn" ng-click="uploadFile()" ng-disabled="thdStepForm.$invalid">далее</md-button>
+									  </div>
+								  </div>
+							  </form>
+						  </div>
+					  </div>
+					  <div ng-switch-when="true">
+						  <div class="popup-header"><h3>Уасяяя, да ты красаучик!</h3></div>
+						  <div class="form-wrapper">
+							  Благодарочка!
+							  <md-button class="main-btn send-btn" ng-click="ok()">далее</md-button>
+						  </div>
+					  </div>
+				  </div>
+			  </div>
+
+			  <div ng-switch-when="borrower_level4" class="animate-switch">
+				  <div ng-switch on="verificationSuccess">
+					  <div ng-switch-when="false">
+						  <div class="popup-header">
+							  <h3 class="text-left ib">Ввод персональных данных заемщика</h3><span class="ib">Шаг 5 из 7</span>
+						  </div>
+						  <div class="form-wrapper">
+							  <div>{{successFourStep.messages}}</div>
+							  <p class="notice"><span>* Все поля обязательны для заполнения. </span>Ваши личные данные будут надежно храниться на серверах Мальты и Монако в зашифрованом виде и не будут передаваться третьим лицам. Вся предотавленная информаци необходима для проверки кредитной истории и платежеспособности.</p>
+							  <form name="fourStepForm">
+								  <div class="m-col-8 m-mar-col-2">
+									  <div layout="row" layout-align="center end">
+
+										  <md-input-container class="md-block" flex="50">
+											  <label>Время</label>
+											  <input ng-model="userPhone.time" name="time" type="time">
+										  </md-input-container>
+
+										  <!--<md-input-container class="md-block" flex="50">
+											  <label>Дата звонка</label>
+											  <input ng-model="userPhone.date" name="time" placeholder="" type="text">
+										  </md-input-container>-->
+
+										  <md-input-container class="md-block" flex="50" layout="row">
+											  <div flex-gt-sm class="date-wrapper">
+												  <label>Дата звонка</label>
+												  <p class="ng-pristine md-input">{{userPhone.date | date:'yyyy-MM-dd'}}</p>
+												  <input type="text" class="form-control my-date" uib-datepicker-popup="yyyy-MM-dd" ng-model="userPhone.date" is-open="status.opened" min-date="minDate" max-date="maxDate" datepicker-options="" ng-required="true" close-text="" />
+
+											  </div>
+											  <span class="input-group-btn my-date-span" flex-gt-sm>
+												  <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+											  </span>
+										  </md-input-container>
+										  <!--<md-datepicker ng-model="userSkype.date" md-placeholder="Дата"></md-datepicker>-->
+									  </div>
+									  <div class="column"  layout="column" layout-align="left end">
+										  <md-checkbox md-no-ink aria-label="Checkbox No Ink" ng-true-value="'on'" ng-model="userSkype.today" class="md-primary">
+											  Звонок сегодня
+										  </md-checkbox>
+										  <md-checkbox md-no-ink aria-label="Checkbox No Ink" ng-true-value="'on'" ng-model="userSkype.callBack" class="md-primary">
+											  Если я не смогу ответить то перезвонить через 1 час
+										  </md-checkbox>
+									  </div>
+								  </div>
+								  <div class="grow">
+									  <div class="btn-wrapper center">
+										  <md-button class="main-btn ok-btn" ng-click="send()">ok</md-button>
+									  </div>
+								  </div>
+							  </form>
+						  </div>
+					  </div>
+					  <div ng-switch-when="true">
+						  <div class="popup-header"><h3>Уасяяя, да ты красаучик, внатуре!</h3></div>
+						  <div class="form-wrapper">
+							  Благодарочка!
+							  <md-button class="main-btn send-btn" ng-click="ok()">далее</md-button>
+						  </div>
+					  </div>
+				  </div>
+			  </div>
+
+			  <div ng-switch-when="borrower_level5" class="animate-switch">
+				  <div ng-switch on="verificationSuccess">
+					  <div ng-switch-when="false">
+						  <div class="popup-header">
+							  <h3 class="text-left ib">Ввод персональных данных заемщика</h3><span class="ib">Шаг 6 из 7</span>
+						  </div>
+						  <div class="form-wrapper">
+							  <div>{{successFourStep.messages}}</div>
+							  <p class="notice"><span>* Все поля обязательны для заполнения. </span>Ваши личные данные будут надежно храниться на серверах Мальты и Монако в зашифрованом виде и не будут передаваться третьим лицам. Вся предотавленная информаци необходима для проверки кредитной истории и платежеспособности.</p>
+							  <form name="fiveStepForm">
+								  <div class="m-col-8 m-mar-col-2">
+									  <div layout="row" layout-align="center end">
+
+
+										  <md-input-container class="md-block" flex="50">
+											  <label>Время</label>
+											  <input ng-model="userSkype.time" name="time" type="time">
+										  </md-input-container>
+
+										  <!--<md-input-container class="md-block" flex="50">
+											  <label>Дата звонка</label>
+											  <input ng-model="userSkype.date" name="time" placeholder="" type="text">
+										  </md-input-container>-->
+
+										  <md-input-container class="md-block" flex="50" layout="row">
+											  <div flex-gt-sm class="date-wrapper">
+												  <label>Дата звонка</label>
+												  <p class="ng-pristine md-input">{{userSkype.date | date:'yyyy-MM-dd'}}</p>
+												  <input type="text" class="form-control my-date" uib-datepicker-popup="yyyy-MM-dd" ng-model="userSkype.date" is-open="status.opened" min-date="minDate" max-date="maxDate" datepicker-options="" ng-required="true" close-text="" />
+
+											  </div>
+											  <span class="input-group-btn my-date-span" flex-gt-sm>
+												  <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+											  </span>
+										  </md-input-container>
+										  <!--<md-datepicker ng-model="userSkype.date" md-placeholder="Дата"></md-datepicker>-->
+									  </div>
+									  <div class="column"  layout="column" layout-align="left end">
+										  <md-checkbox md-no-ink aria-label="Checkbox No Ink" ng-true-value="'on'" ng-model="userSkype.today" class="md-primary">
+											  Звонок сегодня
+										  </md-checkbox>
+										  <md-checkbox md-no-ink aria-label="Checkbox No Ink" ng-true-value="'on'" ng-model="userSkype.callBack" class="md-primary">
+											  Если я не смогу ответить то перезвонить через 1 час
+										  </md-checkbox>
+									  </div>
+								  </div>
+								  <div class="grow">
+									  <div class="btn-wrapper center">
+										  <md-button class="main-btn ok-btn" ng-click="send()">ok</md-button>
+									  </div>
+								  </div>
+							  </form>
+						  </div>
+					  </div>
+					  <div ng-switch-when="true">
+						  <div class="popup-header"><h3>АААААА пятерочка!</h3></div>
+						  <div class="form-wrapper">
+							  Благодарочка!
+							  <md-button class="main-btn send-btn" ng-click="ok()">далее</md-button>
+						  </div>
+					  </div>
+				  </div>
+			  </div>
+
+			  <div ng-switch-when="6" class="animate-switch">
+				  <div class="popup-header">
+					  <h3 class="text-left ib">Настройка профиля</h3><span class="ib">Шаг 7 из 7</span>
+				  </div>
+				  <div class="form-wrapper">
+					  <div class="m-col-6 m-mar-col-3">
+						  <div class="greetings">
+							  <h2>Поздравляем</h2>
+							  <p>теперь вы можете быстро и удобно брать кредит в нашей системе</p>
+						  </div>
+					  </div>
+					  <div class="m-col-12">
+						  <p class="notice mb"><span>* Все поля обязательны для заполнения. </span>Ваши личные данные будут надежно храниться на серверах Мальты и Монако в зашифрованом виде и не будут передаваться третьим лицам. Вся предотавленная информаци необходима для проверки кредитной истории и платежеспособности.</p>
+					  </div>
+
+					  <form name="projectForm3">
+						  <div class="m-col-10 m-mar-col-1">
+							  <div layout="row">
+								  <md-checkbox md-no-ink aria-label="Checkbox No Ink" ng-model="user.rssFin" class="md-primary" flex="50">
+									  Подписаться на рассылку от FinClub
+								  </md-checkbox>
+								  <md-checkbox md-no-ink aria-label="Checkbox No Ink" ng-model="user.yepFin" class="md-primary" flex="50">
+									  Ознакомлен и согласен с правилами FinClub
+								  </md-checkbox>
+							  </div>
+						  </div>
+						  <div class="grow">
+							  <div class="btn-wrapper center">
+								  <md-button class="main-btn ok-btn" ng-click="cancel()">ok</md-button>
+							  </div>
+						  </div>
+					  </form>
+				  </div>
+			  </div>
+
+			  <!--div ng-switch-when="7" class="animate-switch">
+				  <div class="popup-header">
+					  <h3>Регистрация заемщика</h3>
+				  </div>
+				  <div class="form-wrapper">
+					  <div class="img">
+						  <img src="images/fc-logo.png" alt="">
+					  </div>
+					  <h2 class="text-center">Поздравляем</h2>
+					  <p class="text-center underh">Вы вступили в FinClub</p>
+					  <p class="notice text-center">Мы отправили на Вашу почту письмо со ссылкой по которой Вы можете активировать аккаунт.</p>
+					  <h4 class="text-center">Предлагаем Вам</h4>
+					  <p class="notice text-center">ознакомиться с <a href="">демо-версией</a> системы</p>
+					  <p class="notice text-center">или продолжить <a href="">регистрацию</a></p>
+					  <div class="btn-wrapper center">
+						  <md-button class="main-btn ok-btn" ng-click="send()">ok</md-button>
+					  </div>
+				  </div>
+			  </div-->
+		</div>
+		<a href="" class="my-close" ng-click="cancel()">
+			<div class="left-border"></div>
+			<div class="right-border"></div>
+		</a>

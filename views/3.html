@@ -1,0 +1,48 @@
+		<div class="popup-header">
+			<h3 class="text-left ib">Ввод персональных данных заемщика</h3><span class="ib">Шаг 3 из 7</span>
+		</div>
+		<div class="form-wrapper">
+			<p class="notice"><span>* Все поля обязательны для заполнения. </span>Ваши личные данные будут надежно храниться на серверах Мальты и Монако в зашифрованом виде и не будут передаваться третьим лицам. Вся предотавленная информаци необходима для проверки кредитной истории и платежеспособности.</p>
+			<form name="projectForm3">
+				<div layout="row">
+					<md-input-container class="md-block" flex="33">
+			          <label>Серия и номер паспорта</label>
+			          <input ng-model="user.passport" name="passport">
+			        </md-input-container>
+					<md-input-container class="md-block" flex="66">
+			          <label>Кем, где и когда выдан</label>
+			          <input ng-model="user.passportInfo" name="passportInfo">
+			        </md-input-container>
+	        	</div>
+				<div layout="row">
+					<md-input-container class="md-block" flex="66">
+			          <label>Адрес прописки</label>
+			          <input ng-model="user.adressInfo" name="firstName">
+			        </md-input-container>
+					<md-input-container class="md-block" flex="33">
+			          <label>Гражданство</label>
+			          <input ng-model="user.nationality" name="nationality">
+			        </md-input-container>
+	        	</div>
+				<div layout="row">
+					<md-input-container class="md-block" flex="33">
+			          <label>Номер ИНН</label>
+			          <input ng-model="user.inn" name="inn">
+			        </md-input-container>
+	        	</div>
+		        <div class="grow aicenter">
+		        	<div class="m-col-10">
+				        <md-checkbox md-no-ink aria-label="Checkbox No Ink" ng-model="data.cb7" class="md-primary">
+				          Вся информация правдива и правильна
+				        </md-checkbox>
+		        	</div>
+		        	<div class="m-mar-col-2 m-col-2">
+		        		<md-button class="main-btn send-btn">далее</md-button>
+		        	</div>
+		        </div>
+		    </form>
+		</div>
+		<a href="" class="my-close" ng-click="cancel()">
+			<div class="left-border"></div>
+			<div class="right-border"></div>
+		</a>

@@ -1,0 +1,35 @@
+		<div class="popup-header">
+			<h3 class="text-left ib">Ввод персональных данных заемщика</h3><span class="ib">Шаг 6 из 7</span>
+		</div>
+		<div class="form-wrapper">
+			<p class="notice"><span>* Все поля обязательны для заполнения. </span>Ваши личные данные будут надежно храниться на серверах Мальты и Монако в зашифрованом виде и не будут передаваться третьим лицам. Вся предотавленная информаци необходима для проверки кредитной истории и платежеспособности.</p>
+			<form name="projectForm3">
+				<div class="m-col-8 m-mar-col-2">
+					<div layout="row" layout-align="center end">
+
+						<md-input-container class="md-block" flex="50">
+				          <label>Время</label>
+				          <input ng-model="user.secondName" name="secondName" placeholder="" type="time">
+				        </md-input-container>
+				        <md-datepicker ng-model="user.verificationDate" md-placeholder="Дата"></md-datepicker>
+		        	</div>	
+		        	<div class="column"  layout="column" layout-align="left end">
+				        <md-checkbox md-no-ink aria-label="Checkbox No Ink" ng-model="user.today" class="md-primary">
+				          Звонок сегодня
+				        </md-checkbox>
+				        <md-checkbox md-no-ink aria-label="Checkbox No Ink" ng-model="user.todayHour" class="md-primary">
+				         Если я не смогу ответить то перезвонить через 1 час
+				        </md-checkbox>
+		        	</div>
+				</div>
+				<div class="grow">
+					<div class="btn-wrapper center">
+						<md-button class="main-btn ok-btn">ok</md-button>
+					</div>					
+				</div>
+		    </form>
+		</div>
+		<a href="" class="my-close" ng-click="cancel()">
+			<div class="left-border"></div>
+			<div class="right-border"></div>
+		</a>

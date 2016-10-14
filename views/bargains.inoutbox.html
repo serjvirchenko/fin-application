@@ -1,0 +1,192 @@
+<div>
+  <h3 class="uppercase">Входящие запросы</h3>
+  <div class="message-container" ng-class="{'opened': $index === messagesOpened}" ng-repeat="bargain in bargains.bargains">
+
+    <!--BARGAIN HEADER-->
+
+    <div class="message-header">
+      <div class="photo-rait">
+        <div class="photo" style="background-color: #fff">
+          <div class="photo-empty fa fa-user"></div>
+        </div>
+        <div class="rait">
+          <uib-rating ng-model="rate" max="5" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" aria-labelledby="default-rating"></uib-rating>
+          <span class="dig">78/100</span>
+        </div>
+      </div>
+      <div class="money">
+        <div class="icon icon-q6"></div>
+        <div class="digit" ng-if="bargain.minSum != bargain.maxSum">{{bargain.minSum | number : 0}}-{{bargain.maxSum | number : 0}}<br><span>USD</span></div>
+        <div class="digit" ng-if="bargain.minSum === bargain.maxSum">{{bargain.minSum | number : 0}}<br><span>USD</span></div>
+      </div>
+      <div class="time">
+        <div class="icon icon-q8"></div>
+        <div class="digit">{{bargain.term}}<br><span ng-if="bargain.termType === 'M'"> месяца</span><span ng-if="bargain.termType === 'D'"> дней</span></div>
+      </div>
+      <div class="percent">
+        <div class="icon icon-q9"></div>
+        <div class="digit" ng-if="bargain.minPercent != bargain.maxPercent">{{bargain.minPercent}}-{{bargain.maxPercent}}<br><span>% годовых</span></div>
+        <div class="digit" ng-if="bargain.minPercent === bargain.maxPercent">{{bargain.minPercent}}<br><span>% годовых</span></div>
+      </div>
+      <div class="time-message">
+        <div class="icon icon-q8"></div>
+        <div class="digit">{{bargain.createDate}}</div>
+      </div>
+      <div class="group-btns">
+        <a href="" class="fst"></a>
+        <a href="" class="scd"></a>
+        <a href="" class="thd"></a>
+        <a href="" class="frth"></a>
+      </div>
+    </div>
+
+    <a href="" class="message-quantity">{{bargain.count}}<div class="message-new" ng-if="bargain.countNew != 0">{{bargain.countNew}}</div></a>
+    <a href="" class="message-trigger" ng-click="toggleMessages($index, bargain.id)"></a>
+
+    <!--BARGAIN BODY-->
+
+    <div class="message-body">
+      <div ng-if="$index === messagesOpened">
+<!--
+        <div class="spinner" ng-show="insteadMessagesSpinner"><md-progress-circular md-mode="indeterminate" md-diameter="90" ></md-progress-circular></div>
+-->
+        <div class="bargain-block" ng-class='{"me" : userId === message.user_id}' ng-repeat="message in insteadMessages track by $index">
+          <div class="bargain-wrapper">
+            <div class="bargain-man-info">
+              <div class="photo" style="background-color: #fff">
+                <div class="photo-empty fa fa-user"></div>
+              </div>
+              <div class="info">
+                <p class="name" ng-if="userId != bargainInbox.user_id">Ваcя пупкин</p>
+                <p class="name" ng-if="userId === bargainInbox.user_id">Вы</p>
+                <p class="time">{{message.createDate}}</p>
+              </div>
+            </div>
+            <div class="bargain-body">
+              <h5 ng-if="userId != bargainInbox.user_id">Предлагает Вам</h5><h5 ng-if="userId === bargainInbox.user_id">Предлагает Вы</h5>
+              <div class="flex">
+                <div class="money">
+                  <div class="icon icon-q6"></div>
+                  <div class="digit">{{bargainInbox.body.sum}}<span>USD</span></div>
+                </div>
+                <div class="time">
+                  <div class="icon icon-q8"></div>
+                  <div class="digit">{{bargainInbox.body.term}}<span ng-if="bargainInbox.body.termType === 'M'"> месяца</span><span ng-if="bargainInbox.body.termType === 'D'"> дней</span></div>
+                </div>
+                <div class="percent">
+                  <div class="icon icon-q9"></div>
+                  <div class="digit">{{bargainInbox.body.percent}} %<span> годовых</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="btns" ng-if="userId != bargainInbox.user_id && $last && statusDataInbox.status === 'opened'"">
+          <div>
+            <a href="" class="success" aria-label="Подтвердить" ng-click="createMes(bargainInbox, $parent.$parent.$index)">
+              <md-tooltip md-direction="top" md-delay="100">
+                Подтвердить
+              </md-tooltip>
+            </a>
+            <a href="" class="bargain" aria-label="Торг" ng-click="startBargain(inboxMessage)" ng-if="inboxMessage.minSum != inboxMessage.maxSum || inboxMessage.minPercent != inboxMessage.maxPercent">
+              <md-tooltip md-direction="top" md-delay="100">
+                Торг
+              </md-tooltip>
+            </a>
+            <a href="" class="cancel" aria-label="Отменить" ng-click="rejectMes(inboxMessage, $parent.$parent.$index)">
+              <md-tooltip md-direction="top" md-delay="100">
+                Отменить
+              </md-tooltip>
+            </a>
+            <a href="" class="calculate" ng-click="openCalculator(bargainInbox.body)">Рассчитать</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="bargain-block me" ng-if="appendBargain">
+        <div class="bargain-wrapper">
+          <div class="bargain-man-info">
+            <div class="photo" style="background-color: #fff">
+              <div class="photo-empty fa fa-user"></div>
+            </div>
+            <div class="info">
+              <p class="name" ng-if="userId != bargainInbox.user_id">Ваcя пупкин</p>
+              <p class="name" ng-if="userId === bargainInbox.user_id">Вы</p>
+              <p class="time">{{bargainInbox.createDate}}</p>
+            </div>
+          </div>
+          <div class="bargain-body">
+            <h5 ng-if="userId != bargainInbox.user_id">Предлагает Вам</h5><h5 ng-if="userId === bargainInbox.user_id">Предлагаете Вы</h5>
+            <div class="flex">
+              <form action="">
+                <md-input-container class="md-block" flex-gt-sm>
+                  <label>Сумма ()</label>
+                  <input ng-model="newBargainData.sum" type="number">
+                </md-input-container>
+                <md-input-container class="md-block" flex-gt-sm>
+                  <label>Срок (<span ng-if="newBargainData.termType === 'M'">месяца</span><span ng-if="newBargainData.termType === 'D'">дней</span>)</label>
+                  <input ng-model="newBargainData.term" type="number">
+                </md-input-container>
+                <md-input-container class="md-block" flex-gt-sm>
+                  <label>Процент (%)</label>
+                  <input ng-model="newBargainData.percent" type="number">
+                </md-input-container>
+                <md-input-container class="md-block" flex-gt-sm>
+                  <md-button ng-click="sendNewbargain()">Отправить</md-button>
+                </md-input-container>
+              </form>
+              {{bargainErrors}}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bargain-block center" ng-if="appendRejectMes || statusDataInbox.status != 'opened' || appendCreateMes">
+        <div class="bargain-wrapper">
+          <div class="bargain-body" ng-if="statusDataInbox.status === 'opened' && appendRejectMes">
+            <h5>Оу! A чейта ты отказался: </h5>
+            <div class="flex">
+              <form action="" name="rejectForm">
+                <md-input-container flex-gt-sm>
+                  <label>Причина</label>
+                  <md-select ng-model="rejectMesData.message" required>
+                    <md-option value="{{rejectMessage}}" ng-repeat="rejectMessage in rejectMessages">
+                      {{rejectMessage}}
+                    </md-option>
+                  </md-select>
+                </md-input-container>
+                <md-input-container class="md-block" flex-gt-sm>
+                  <md-button ng-click="sendRejectMes()" ng-disabled="rejectForm.$invalid">Отправить</md-button>
+                </md-input-container>
+              </form>
+              {{bargainErrors}}
+            </div>
+          </div>
+          <div class="bargain-body bargain-body-error" ng-if="statusDataInbox.status === 'rejected'">
+            <h4>Отказочка!</h4>
+            <p>По причине: {{inboxMessage.rejectedMessage}}</p>
+          </div>
+          <div class="bargain-body bargain-body-success" ng-if="statusDataInbox.status === 'finished'">
+            <h4>Саксесс!</h4>
+            <div  layout="row">
+              <div flex-gt-sm>
+                <p>Сумма (<span ng-if="finalInboxData.currency === 1">UAH</span><span ng-if="finalInboxData.currency === 2">USD</span>)</p>
+                <p>{{finalInboxData.sum}}</p>
+              </div>
+              <div flex-gt-sm>
+                <p>Срок (<span ng-if="finalInboxData.termType === 'M'">месяца</span><span ng-if="finalInboxData.termType === 'D'">дней</span>)</p>
+                <p>{{finalInboxData.term}}</p>
+              </div>
+              <div flex-gt-sm>
+                <p>Процент (%)</p>
+                <p>{{finalInboxData.percent}}</p>
+              </div>
+            </div>
+            <div layout="row" layout-align="center center">
+              <md-button class="md-raised md-primary" ng-click="openModalOrderCreate(finalInboxData)" ng-if="comissBorrowStatus || comissCreditStatus">Оплатить</md-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

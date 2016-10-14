@@ -1,0 +1,273 @@
+<div class="page" ng-controller="DemoCtrl">
+    <div class="header">
+        <div class="big-wrapper">
+            <div class="grow">
+                <div class="m-col-2">
+                    <div class="menu">
+                        <a href="" class="" data-add="ul">
+                            <div class="bullet"></div>
+                            <div class="bullet"></div>
+                            <div class="bullet"></div>
+                        </a>
+                        <ul>
+                            <li><a href="">Menu1</a></li>
+                            <li><a href="">Menu1Menu1</a></li>
+                            <li><a href="">Menu1</a></li>
+                            <li><a href="">Menu1</a></li>
+                            <li><a href="">Menu1</a></li>
+                        </ul>
+                    </div>
+                    <div class="logo"><a href=""><img src="images/logo.png" alt=""></a></div>
+                </div>
+                <div class="m-col-8">
+                    <nav class="navigation">
+                        <a href="">КРЕДИТОРАМ</a>
+                        <a href="">ЗАЕМЩИКАМ</a>
+                        <a href="">Правила</a>
+                        <a href="">Документы</a>
+                        <a href="">Вопрос-ответ</a>
+                    </nav>
+                </div>
+                <div class="m-col-2">
+                    <div class="search">
+                        <a href="" class="fa fa-search" data-add="input"></a>
+                        <input type="search">
+                    </div>
+                    <div class="lang fa fa-caret-down">
+                        <select name="" id="">
+                            <option value="">РУС</option>
+                            <option value="">ENG</option>
+                        </select>
+                    </div>
+                    <div class="logout">
+                        <a href="/logout"><i class="fa fa-sign-out"></i>Выход</a>
+                    </div>
+                    <!--<div class="my-face">
+                      <div class="img" style="background-image: url({{person.photo}})"></div>
+                    </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- content -->
+
+    <div class="content">
+        <div class="profile">
+            <div class="big-wrapper">
+                <div class="grow">
+                    <div class="m-col-4">
+                        <div class="person">
+                            <div class="photo-rait">
+                                <div class="photo" style="background-image: url({{userData.user.photo}}); background-size: cover; background-position: center; background-color: #fff">
+                                    <div ng-if="!userData.user.photo" class="photo-empty fa fa-user"></div>
+                                </div>
+                                <div class="rait">
+                                    <uib-rating ng-model="rate" max="5" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" aria-labelledby="default-rating"></uib-rating>
+                                    <div class="dig">78/100</div>
+                                </div>
+                            </div>
+                            <div class="info">
+                                <p class="name">{{userData.user.name}}</p>
+                                <p class="role">{{userData.user.type}}</p>
+                                <div class="social">
+                                    <a href="{{soc.link}}" ng-repeat="soc in person.social" class="{{soc.className}}"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-col-4">
+                        <div class="messages">
+                            <a href="" ng-click="open()"><i class="fa fa-envelope-o"></i>
+                                <div class="my-tooltip">
+                                    <h2>Внимание!</h2>
+                                    <p>Для доступа ко всем инстурементам системы FinClub необходимо закончить все этапы регистарции</p>
+                                </div>
+                                <b>14</b> непрочитанных сообщений</a>
+                        </div>
+                    </div>
+                    <div class="m-col-4"></div>
+                </div>
+            </div>
+            <a href="" class="open-profile"></a>
+        </div>
+        <div class="big-wrapper">
+            <div class="content-wrapper">
+
+
+
+                <uib-tabset>
+                    <uib-tab heading="Поиск">
+                        <h3>Поиск предложений по кредиту</h3>
+                        <div class="grow">
+                            <div class="m-col-3">
+                                <div class="filter-block">
+                                    <div class="filter">
+                                        <md-input-container>
+                                            <label>Количество на странице</label>
+                                            <md-select ng-model="someData.limit" disabled="{{isDisabled}}">
+                                                <md-option>
+                                                    5
+                                                </md-option>
+                                                <md-option selected>
+                                                    10
+                                                </md-option>
+                                            </md-select>
+                                        </md-input-container>
+                                    </div>
+                                    <div class="filter">
+                                        <md-input-container>
+                                            <label>Сортировать по:</label>
+                                            <md-select ng-model="someData.orderBy" disabled="{{isDisabled}}">
+                                                <md-option value="createDate" selected>
+                                                    Дата создания
+                                                </md-option>
+                                                <md-option value="minSum">
+                                                    Сумма
+                                                </md-option>
+                                                <md-option value="term">
+                                                    Срок
+                                                </md-option>
+                                                <md-option value="minPercent">
+                                                    Процент
+                                                </md-option>
+                                            </md-select>
+                                        </md-input-container>
+                                    </div>
+                                    <div class="filter">
+                                        <md-input-container>
+                                            <label>Направление сортировки:</label>
+                                            <md-select ng-model="someData.orderDirection" disabled="{{isDisabled}}">
+                                                <md-option value="ASC" selected>
+                                                    UP
+                                                </md-option>
+                                                <md-option value="DESC">
+                                                    DOWN
+                                                </md-option>
+                                            </md-select>
+                                        </md-input-container>
+                                    </div>
+                                    <div class="filter">
+                                        <h4>Сумма</h4>
+                                        <div class="range-filter">
+                                            <input type="number" ng-model="someData.minSum" disabled="{{isDisabled}}"> - <input type="number" ng-model="someData.maxSum" disabled="{{isDisabled}}">
+                                            <div class="range">
+                                                <div range-slider min="0" max="200000" model-min="someData.minSum" model-max="someData.maxSum"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="filter">
+                                        <h4>Срок (месяцев)</h4>
+                                        <div class="range-filter">
+                                            <input type="number" ng-model="someData.minTerm" disabled="{{isDisabled}}"> - <input type="number" ng-model="someData.maxTerm" disabled="{{isDisabled}}">
+                                            <div class="range">
+                                                <div range-slider min="1" max="24" model-min="someData.minTerm" model-max="someData.maxTerm" disabled="true"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="filter">
+                                        <h4>Процент</h4>
+                                        <div class="range-filter">
+                                            <input type="number" ng-model="someData.minPercent" disabled="{{isDisabled}}"> - <input type="number" ng-model="someData.maxPercent" disabled="{{isDisabled}}">
+                                            <div class="range">
+                                                <div range-slider min="1" max="20" model-min="someData.minPercent" model-max="someData.maxPercent" disabled="true"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--<md-button class="md-raised md-primary" ng-click="filterMe()" disabled>Фильтр</md-button>-->
+                                </div>
+                            </div>
+                            <div class="m-col-9">
+                                <div class="offers-block">
+                                    <div class="offer" ng-repeat="offer in offers.offers.offers track by $index">
+                                        <div class="offer-header" flex>
+                                            <div class="money">
+                                                <div class="icon icon-q6"></div>
+                                                <div ng-if="offer.minSum = offer.maxSum">{{offer.minSum}} <span>{{offer.currencyCode}}</span></div>
+                                                <div ng-if="offer.minSum != offer.maxSum">{{offer.minSum}} - {{offer.maxSum}} <span>{{offer.currencyCode}}</span></div>
+                                            </div>
+                                            <div class="time">
+                                                <div class="icon icon-q8"></div>
+                                                <div ng-if="offer.term.days != 0">{{offer.term.months}} <span ng-if="offer.term.months">месяца</span> {{offer.term.days}} <span>дней</span></div>
+                                                <div ng-if="offer.term.days">{{offer.term.months}} <span ng-if="offer.term.months">месяца</span></div>
+                                            </div>
+                                            <div class="percent">
+                                                <div class="icon  icon-q9"></div>
+                                                <div ng-if="offer.minPercent = offer.maxPercent">{{offer.minPercent}} <span>% годовых</span></div>
+                                                <div ng-if="offer.minPercent != offer.maxPercent">{{offer.minPercent}} - {{offer.maxPercent}}<span>% годовых</span></div>
+                                            </div>
+                                        </div>
+                                        <div class="offer-body">
+                                            <div class="grow">
+                                                <div class="m-col-5">
+                                                    <div class="person">
+                                                        <div class="photo-rait">
+                                                            <div class="photo" style="background-image: url({{person.photo}}); background-size: cover; background-position: center; background-color: #fff">
+                                                                <div class="empty-photo fa fa-user" ng-if="!person.photo"></div>
+                                                            </div>
+                                                            <div class="info">
+                                                                <p class="name">Имя</p>
+                                                                <p class="role">Тип</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="rait">
+                                                            <uib-rating ng-model="rate" max="5" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" aria-labelledby="default-rating"></uib-rating>
+                                                            <div class="dig">78/100</div>
+                                                        </div>
+                                                        <div class="timing">
+                                                            <div class="access"></div>
+                                                            <p><span class="access-text">Дата создания</span> {{offer.createDate}}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="m-col-7">
+                                                    <div class="description">
+                                                        <h4>Header of description</h4>
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat tempore asperiores nemo aliquam adipisci exercitationem ducimus recusandae, earum vel ut ratione similique ullam, eius rerum reiciendis magni. Expedita, esse obcaecati.</p>
+                                                        <a href="" class="button calculator fa fa-calculator">Рассчитать кредит</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="btns-group">
+                                            <div class="btns-left">
+                                                <a href=""></a>
+                                                <a href=""></a>
+                                                <a href=""></a>
+                                            </div>
+                                            <div class="btns-right">
+                                                <a href="" class="icon-check">Принять оффер</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </uib-tab>
+                    <uib-tab ng-repeat="tab in tabs" heading="{{tab.title}}" disable="tab.disabled">
+                        {{tab.content}}
+                    </uib-tab>
+                </uib-tabset>
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <!-- end content -->
+
+    <footer class="footer">
+        <div class="big-wrapper">
+            <div class="grow">
+                <div class="m-col-4"></div>
+                <div class="m-col-4">
+                    <img src="images/logo-white.png" alt="">
+                </div>
+                <div class="m-col-4">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, quibusdam. Architecto asperiores aliquam iure eum quo! Similique quod molestias alias necessitatibus, eligendi iusto. Vero odio quisquam iure dicta, ipsam totam?</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>

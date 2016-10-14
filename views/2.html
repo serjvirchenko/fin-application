@@ -1,0 +1,106 @@
+		<div class="popup-header">
+			<h3 class="text-left ib">Ввод персональных данных заемщика</h3><span class="ib">Шаг 2 из 7</span>
+		</div>
+		<div class="form-wrapper">
+			<p class="notice"><span>* Все поля обязательны для заполнения. </span>Ваши личные данные будут надежно храниться на серверах Мальты и Монако в зашифрованом виде и не будут передаваться третьим лицам. Вся предотавленная информаци необходима для проверки кредитной истории и платежеспособности.</p>
+			<form name="projectForm1">
+				<div layout-gt-sm="row">
+					<md-input-container class="md-block" flex-gt-sm>
+			          <label>Имя</label>
+			          <input ng-model="userData.firstName" name="firstName">
+			        </md-input-container>
+					<md-input-container class="md-block" flex-gt-sm>
+			          <label>Отчество</label>
+			          <input ng-model="userData.secondName" name="secondName">
+			        </md-input-container>
+					<md-input-container class="md-block" flex-gt-sm>
+			          <label>Фамилия</label>
+			          <input ng-model="userData.thirdName" name="thirdName">
+			        </md-input-container>
+
+	        	</div>
+				<div layout-gt-sm="row">
+					<md-input-container class="md-block" flex-gt-sm>
+			          <label>Телефон</label>
+			          <input ng-model="userData.phone" name="firstName">
+			        </md-input-container>
+					<md-input-container class="md-block" flex-gt-sm>
+			          <label>E-mail</label>
+			          <input ng-model="userData.mail" name="secondName">
+			        </md-input-container>
+					<md-input-container class="md-block" flex-gt-sm>
+			          <label>Skype</label>
+			          <input ng-model="userData.skype" name="thirdName">
+			        </md-input-container>
+	        	</div>
+				<div layout-gt-sm="row">
+					<md-input-container class="md-block" flex-gt-sm>
+					    <md-radio-group ng-model="userData.pol">
+					      <md-radio-button value="М" class="md-primary">М</md-radio-button>
+					      <md-radio-button value="Ж" class="md-primary">Ж</md-radio-button>
+					    </md-radio-group>
+				    </md-input-container>
+					<md-input-container class="md-block" flex-gt-sm layout="row">
+						<div flex="50">
+							<md-checkbox md-no-ink aria-label="Checkbox No Ink" ng-model="data.cb5" class="md-primary">
+					          В браке
+					        </md-checkbox>	
+						</div>
+					    <div flex="50">
+					    	<md-checkbox md-no-ink aria-label="Checkbox No Ink" ng-model="data.cb6" class="md-primary">
+					          Замужем
+					        </md-checkbox>
+					    </div>
+			        </md-input-container>
+	        		<md-datepicker ng-model="userData.birthDate" md-placeholder="Дата рождения"></md-datepicker>
+	        	</div>
+	        	<div layout-gt-sm="row">
+				    <md-input-container class="md-block" flex-gt-sm>
+			          <label>Образование</label>
+			          <md-select ng-model="userData.education">
+			            <md-option value="1">
+			              1
+			            </md-option>
+			            <md-option value="2">
+			              2
+			            </md-option>
+			            <md-option value="3">
+			              3
+			            </md-option>
+			          </md-select>
+			        </md-input-container>
+				    <md-input-container class="md-block" flex-gt-sm>
+			          <label>Соц. сеть</label>
+			          <md-select ng-model="userData.social">
+			            <md-option value="vk">
+			              vk
+			            </md-option>
+			            <md-option value="bf">
+			              bf
+			            </md-option>
+			            <md-option value="in">
+			              in
+			            </md-option>
+			          </md-select>
+			        </md-input-container>
+		        </div>
+		        <div class="grow aicenter">
+		        	<div class="m-col-10">
+				        <md-checkbox md-no-ink aria-label="Checkbox No Ink" ng-model="userData.check" class="md-primary">
+				          Вся информация правдива и правильна
+				        </md-checkbox>
+		        	</div>
+					<md-input-container>
+						<input type="hidden" ng-model="userData.personalDataCsrf" name="personalDataCsrf" value="{{personalDataCsrf}}">
+					</md-input-container>
+
+		        	<div class="m-mar-col-2 m-col-2">
+		        		<md-button class="main-btn send-btn" ng-click="sendData()">далее</md-button>
+		        	</div>
+		        </div>
+		    </form>
+		</div>
+		<a href="" class="my-close" ng-click="cancel()">
+			<div class="left-border"></div>
+			<div class="right-border"></div>
+		</a>

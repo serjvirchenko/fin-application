@@ -1,0 +1,60 @@
+
+
+    <!-- content -->
+
+    <div class="content" ng-switch="userVerificationLevel">
+        <div class="profile">
+            <div class="big-wrapper">
+                <div class="grow">
+                    <div class="m-col-4">
+                        <div class="person">
+                            <div class="photo-rait">
+                                <div class="photo" style="background-size: cover; background-position: center; background-color: #fff">
+                                    <div class="photo-empty fa fa-user"></div>
+                                </div>
+                                <div class="rait">
+                                    <uib-rating ng-model="rate" max="5" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" aria-labelledby="default-rating"></uib-rating>
+                                    <div class="dig">78/100</div>
+                                </div>
+                            </div>
+                            <div class="info">
+                                <p class="name">{{userData.user.name}}</p>
+                                <p class="role">{{userData.user.type}}</p>
+                                <div class="social">
+                                    <a href="{{soc.link}}" ng-repeat="soc in person.social" class="{{soc.className}}"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-col-4">
+                        <div class="messages">
+                            <a href="" ng-click="openModalVerification()"><i class="fa fa-envelope-o"></i>
+                                <div class="my-tooltip" ng-if="userVerificationLevel < 6">
+                                    <h2>Внимание!</h2>
+                                    <p>Для доступа ко всем инстурементам системы FinClub необходимо закончить все этапы регистарции</p>
+                                </div>
+                                <b>14</b> непрочитанных сообщений</a>
+                        </div>
+                    </div>
+                    <div class="m-col-4">
+
+                    </div>
+                </div>
+            </div>
+            <a href="" class="open-profile"></a>
+        </div>
+        <div class="big-wrapper">
+            <div class="content-wrapper">
+                <uib-tabset>
+
+                    <uib-tab ng-repeat="t in tabs" heading="{{t.heading}}" ng-click="go(t.routeTo) || go(t.route)" active="t.active" disable="t.disable"></uib-tab>
+
+                    <md-button class="addOffer" disable="addOfferDisabled" ng-click="hasPermissionVerificated(userRoles) || openModalAddOffer()" ng-disabled="hasPermissionVerificated(userRoles)">Создать оффера</md-button>
+                </uib-tabset>
+                <div ui-view="tabs" class="tab-content"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- end content -->
+

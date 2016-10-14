@@ -1,0 +1,36 @@
+<div class="animate-switch-container">
+    <div class="spinner" ng-show="spinnerCalcModal"><md-progress-circular md-mode="indeterminate" md-diameter="90" ></md-progress-circular></div>
+    <div class="animate-switch">
+        <div class="popup-header">
+            <h3 class="text-left ib">Калькулятор</h3><!--<span class="ib">Шаг 2 из 7</span>-->
+        </div>
+        <div class="form-wrapper">
+                <div layout="row">
+                    <md-input-container class="md-block" flex="33">
+                        <label>Сумма ({{calculateOfferData.currencyCode}})</label>
+                        <input ng-model="calcData.calcSum | number : 0" readonly>
+                    </md-input-container>
+                    <md-input-container class="md-block" flex="33">
+                        <label ng-if="calcData.calcTermType === 'M'">Срок (Месяцев)</label>
+                        <label ng-if="calcData.calcTermType === 'D'">Срок (Дней)</label>
+                        <input ng-model="calcData.calcTerm" readonly>
+                    </md-input-container>
+                    <md-input-container class="md-block" flex="33">
+                        <label>Годовой %</label>
+                        <input ng-model="calcData.calcPercent" readonly>
+                    </md-input-container>
+                </div>
+            <br>
+                <div>
+                    <p ng-if="calcData.calcTermType === 'M'">Ежемесячный платеж: <span>{{calculatedPerMonth | number : 0}} ({{calcData.calcCurrency}})</span></p>
+                    <p ng-if="calcData.calcTermType === 'D'">Платеж за каждые 10 дней: <span>{{calculatedPerDay | number : 0}} ({{calcData.calcCurrency}})</span></p>
+                    <p ng-if="calcData.calcTermType === 'M'">Общая сумма к выплате: <span>{{calculatedTotalMonth | number : 0}} ({{calcData.calcCurrency}})</span></p>
+                    <p ng-if="calcData.calcTermType === 'D'">Общая сумма к выплате: <span>{{calculatedTotalDay | number : 0}} ({{calcData.calcCurrency}})</span></p>
+                </div>
+        </div>
+    </div>
+</div>
+<a href="" class="my-close" ng-click="cancelCalculate()">
+    <div class="left-border"></div>
+    <div class="right-border"></div>
+</a>

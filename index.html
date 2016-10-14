@@ -1,0 +1,142 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+      <base href="/app/">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/angular-rangeslider/angular.rangeSlider.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/font-awesome.min.css">
+    <link rel="stylesheet" href="styles/reset.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+  </head>
+  <body ng-app="appApp">
+
+    <!-- Add your site or application content here -->
+    <div class="page">
+        <div class="header">
+            <div class="big-wrapper">
+                <div class="grow">
+                    <div class="m-col-2">
+                        <div class="menu">
+                            <a href="" class="" data-add="ul">
+                                <div class="bullet"></div>
+                                <div class="bullet"></div>
+                                <div class="bullet"></div>
+                            </a>
+                            <ul>
+                                <li><a href="">Menu1</a></li>
+                                <li><a href="">Menu1Menu1</a></li>
+                                <li><a href="">Menu1</a></li>
+                                <li><a href="">Menu1</a></li>
+                                <li><a href="">Menu1</a></li>
+                            </ul>
+                        </div>
+                        <div class="logo"><a href=""><img src="images/logo.png" alt=""></a></div>
+                    </div>
+                    <div class="m-col-8">
+                        <nav class="navigation">
+                            <a href="">КРЕДИТОРАМ</a>
+                            <a href="">ЗАЕМЩИКАМ</a>
+                            <a href="">Правила</a>
+                            <a href="">Документы</a>
+                            <a href="">Вопрос-ответ</a>
+                        </nav>
+                    </div>
+                    <div class="m-col-2">
+                        <div class="search">
+                            <a href="" class="fa fa-search" data-add="input"></a>
+                            <input type="search">
+                        </div>
+                        <div class="lang fa fa-caret-down">
+                            <select name="" id="">
+                                <option value="">РУС</option>
+                                <option value="">ENG</option>
+                            </select>
+                        </div>
+                        <div class="logout">
+                            <a href="/logout"><i class="fa fa-sign-out"></i>Выход</a>
+                        </div>
+                        <!--<div class="my-face">
+                          <div class="img" style="background-image: url({{person.photo}})"></div>
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div ui-view></div>
+
+      <div class="spinner" ng-show="spinnerLoading"><md-progress-circular md-mode="indeterminate" md-diameter="90" ></md-progress-circular></div>
+
+        <footer class="footer">
+            <div class="big-wrapper">
+                <div class="grow">
+                    <div class="m-col-4">
+
+                    </div>
+                    <div class="m-col-4">
+                        <img src="images/logo-white.png" alt="">
+                    </div>
+                    <div class="m-col-4">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, quibusdam. Architecto asperiores aliquam iure eum quo! Similique quod molestias alias necessitatibus, eligendi iusto. Vero odio quisquam iure dicta, ipsam totam?</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-material/angular-material.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-modal-service/dst/angular-modal-service.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular-rangeslider/angular.rangeSlider.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/angularjs-acl-master/dist/acl.js"></script>
+
+    <!-- endbower -->
+    <!-- endbuild -->
+
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+
+        <script src="scripts/controllers/CabinetController.js"></script>
+        <script src="scripts/controllers/ModalAddOfferController.js"></script>
+        <script src="scripts/controllers/SearchController.js"></script>
+        <script src="scripts/controllers/ModalVerificationController.js"></script>
+        <script src="scripts/controllers/ModalCreateController.js"></script>
+        <script src="scripts/controllers/ModalOCreateController.js"></script>
+        <script src="scripts/controllers/BargainsController.js"></script>
+        <script src="scripts/controllers/searchDemoController.js"></script>
+        <script src="scripts/controllers/searchListController.js"></script>
+        <script src="scripts/controllers/firstModalController.js"></script>
+        <script src="scripts/controllers/bargainMainController.js"></script>
+        <script src="scripts/services/CabinetService.js"></script>
+        <script src="scripts/services/SearchService.js"></script>
+        <script src="scripts/services/VerificationService.js"></script>
+        <script src="scripts/services/pageService.js"></script>
+        <script src="scripts/services/BargainService.js"></script>
+        <!-- endbuild -->
+</body>
+</html>
